@@ -16,4 +16,18 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_forwarded_https_is_used_for_login_urls(): void
+    {
+        $response = $this
+            ->withServerVariables([
+                'HTTP_X_FORWARDED_PROTO' => 'https',
+                'HTTP_X_FORWARDED_HOST' => 'superstore.test',
+            ])
+            ->get('/login');
+
+        $response
+            ->assertOk()
+            ->assertSee('action="https://superstore.test/login"', false);
+    }
 }
