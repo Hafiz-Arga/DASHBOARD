@@ -88,3 +88,5 @@ Aplikasi ini dapat dibangun Railway menggunakan `Dockerfile`. Saat container mul
 Ganti `MySQL` pada referensi variabel jika layanan database Railway Anda memakai nama lain. Setelah deployment pertama berhasil, set `ADMIN_EMAIL` dan `ADMIN_PASSWORD` sebagai variable rahasia, lalu jalankan `php artisan db:seed --force` sekali dari shell service untuk membuat akun administrator.
 
 Database SQLite lokal tidak ikut dibawa ke Railway. Impor data yang dibutuhkan melalui halaman ETL setelah aplikasi online. `APP_KEY` harus tetap sama setiap kali deployment.
+
+Ukuran file CSV ETL maksimal 20 MB. Batas upload PHP pada image Docker disetel sesuai batas tersebut.
