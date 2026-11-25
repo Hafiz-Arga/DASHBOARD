@@ -39,7 +39,8 @@ class ExecutiveDashboardController extends Controller
         // 2. DRILL-DOWN CONTEXT
         // ==========================================
 
-        $geoLevel = $request->query('geo_level', 'region');
+        $geoLevel = $request->query('geo_level', 'country');
+        $geoCountry = $request->query('geo_country', '');
         $geoRegion = $request->query('geo_region', '');
         $geoState = $request->query('geo_state', '');
 
@@ -47,8 +48,8 @@ class ExecutiveDashboardController extends Controller
         $productCategory = $request->query('product_category', '');
         $productSubcategory = $request->query('product_subcategory', '');
 
-        if (!in_array($geoLevel, ['region', 'state', 'city'])) {
-            $geoLevel = 'region';
+        if (!in_array($geoLevel, ['country', 'region', 'state', 'city'])) {
+            $geoLevel = 'country';
         }
 
         if (!in_array($productLevel, ['category', 'sub-category', 'product'])) {
@@ -223,6 +224,7 @@ class ExecutiveDashboardController extends Controller
         // ==========================================
 
         $geoColumn = match ($geoLevel) {
+            'country' => 'Country',
             'region' => 'Region',
             'state' => 'State',
             'city' => 'City',
@@ -230,18 +232,18 @@ class ExecutiveDashboardController extends Controller
 
         $geoQuery = clone $chartQuery;
 
+        // Country -> Region
+        if ($geoLevel !== 'country' && $geoCountry !== '') {
+            $geoQuery->where('Country', $geoCountry);
+        }
+
         // Region -> State
-        if ($geoLevel === 'state' && $geoRegion !== '') {
+        if (in_array($geoLevel, ['state', 'city'], true) && $geoRegion !== '') {
             $geoQuery->where('Region', $geoRegion);
         }
 
         // State -> City
         if ($geoLevel === 'city') {
-
-            if ($geoRegion !== '') {
-                $geoQuery->where('Region', $geoRegion);
-            }
-
             if ($geoState !== '') {
                 $geoQuery->where('State', $geoState);
             }
@@ -352,6 +354,7 @@ class ExecutiveDashboardController extends Controller
         // ==========================================
 
         $geoBreadcrumb = [
+            'country' => 'Country',
             'region' => 'Region',
             'state' => 'State',
             'city' => 'City',
@@ -364,6 +367,7 @@ class ExecutiveDashboardController extends Controller
         ];
 
         $geoValue = match ($geoLevel) {
+            'region' => $geoCountry,
             'state' => $geoRegion,
             'city' => $geoState,
             default => '',
@@ -391,6 +395,7 @@ class ExecutiveDashboardController extends Controller
             'discountGroups' => $discountGroups,
 
             'geoLevel' => $geoLevel,
+            'geoCountry' => $geoCountry,
             'geoRegion' => $geoRegion,
             'geoState' => $geoState,
             'geoValue' => $geoValue,

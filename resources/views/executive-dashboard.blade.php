@@ -128,13 +128,13 @@
             </div>
 
 
-            {{-- 2. PROFIT BY REGION / STATE / CITY --}}
+            {{-- 2. PROFIT BY COUNTRY / REGION / STATE / CITY --}}
             <div class="chart-card">
 
                 <div class="chart-header">
                     <div>
-                        <h3 id="geo-title">Profit by Region</h3>
-                        <p>Klik batang grafik untuk melihat rincian State hingga City.</p>
+                        <h3 id="geo-title">Profit by Country</h3>
+                        <p>Klik batang untuk menelusuri Country, Region, State, hingga City.</p>
                     </div>
                     <span class="chart-hint-badge">Drill-Down</span>
                 </div>
@@ -210,6 +210,7 @@
             discountGroups: @json($discountGroups),
 
             geoLevel: @json($geoLevel),
+            geoCountry: @json($geoCountry),
             geoRegion: @json($geoRegion),
             geoState: @json($geoState),
 
@@ -311,13 +312,19 @@
             const actions = document.getElementById('geo-actions');
 
             title.textContent = 'Profit by ' +
-                (level === 'region' ?
+                (level === 'country' ?
+                    'Country' :
+                    level === 'region' ?
                     'Region' :
                     level === 'state' ?
                     'State' :
                     'City');
 
-            let path = '<span>Region</span>';
+            let path = '<span>Country</span>';
+
+            if (data.geoCountry !== '') {
+                path += ` <span>›</span> <strong>${escapeHTML(data.geoCountry)}</strong>`;
+            }
 
             if (data.geoRegion !== '') {
                 path += ` <span>›</span> <strong>${escapeHTML(data.geoRegion)}</strong>`;
@@ -331,7 +338,7 @@
 
             actions.innerHTML = '';
 
-            if (level !== 'region') {
+            if (level !== 'country') {
 
                 actions.innerHTML += `
                     <button type="button" class="drill-button"
@@ -636,7 +643,14 @@
                             const params =
                                 new URLSearchParams(window.location.search);
 
-                            if (dashboardData.geoLevel === 'region') {
+                            if (dashboardData.geoLevel === 'country') {
+
+                                params.set('geo_level', 'region');
+                                params.set('geo_country', selectedValue);
+                                params.delete('geo_region');
+                                params.delete('geo_state');
+
+                            } else if (dashboardData.geoLevel === 'region') {
 
                                 params.set('geo_level', 'state');
                                 params.set('geo_region', selectedValue);
@@ -934,6 +948,13 @@
                 params.set('geo_level', 'region');
                 params.delete('geo_region');
                 params.delete('geo_state');
+
+            } else if (dashboardData.geoLevel === 'region') {
+
+                params.set('geo_level', 'country');
+                params.delete('geo_country');
+                params.delete('geo_region');
+                params.delete('geo_state');
             }
 
             loadDashboard(params);
@@ -946,6 +967,7 @@
                 new URLSearchParams(window.location.search);
 
             params.delete('geo_level');
+            params.delete('geo_country');
             params.delete('geo_region');
             params.delete('geo_state');
             params.delete('geo_value');
