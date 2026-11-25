@@ -91,15 +91,12 @@
         }
 
         .brand-mark {
-            display: grid;
-            place-items: center;
             width: 39px;
             height: 39px;
+            object-fit: contain;
             border: 1px solid rgba(255, 255, 255, .35);
             border-radius: 10px;
             background: rgba(255, 255, 255, .1);
-            font-size: 17px;
-            font-weight: 800;
         }
 
         .brand-name {
@@ -276,17 +273,13 @@
         }
 
         .login-icon {
-            display: grid;
-            place-items: center;
             width: 45px;
             height: 45px;
+            object-fit: contain;
             margin-bottom: 26px;
             border: 1px solid #DCE8F7;
             border-radius: 12px;
             background: var(--light);
-            color: var(--blue);
-            font-size: 19px;
-            font-weight: 800;
         }
 
         .login-eyebrow {
@@ -687,7 +680,7 @@
             <div class="hero-orbit"></div>
 
             <div class="brand">
-                <span class="brand-mark">S</span>
+                <img src="{{ asset('images/favicon.png?v=2') }}" alt="Superstore EIS logo" class="brand-mark">
                 <span class="brand-name">SUPERSTORE EIS</span>
             </div>
 
@@ -755,7 +748,7 @@
 
             <div class="login-card">
 
-                <div class="login-icon">S</div>
+                <img src="{{ asset('images/favicon.png?v=2') }}" alt="Superstore EIS logo" class="login-icon">
 
                 <span class="login-eyebrow">ACCOUNT ACCESS</span>
 
