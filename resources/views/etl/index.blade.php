@@ -81,9 +81,9 @@
         gap: 7px;
         padding: 8px 14px;
         border-radius: 8px;
-        border: 1px solid #DCE3ED;
-        background: #FFFFFF;
-        color: #172B4D;
+        border: 1px solid #3976C5;
+        background: #3976C5;
+        color: #FFFFFF;
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
@@ -91,9 +91,9 @@
     }
 
     .etl-tool-btn:hover {
-        border-color: #3976C5;
-        color: #285EA8;
-        background: #F4F9FF;
+        border-color: #285EA8;
+        color: #FFFFFF;
+        background: #285EA8;
         transform: translateY(-1px);
     }
 
@@ -1413,7 +1413,7 @@
                         <span id="uploadHelperHint">Unggah file CSV transaksi Superstore terlebih dahulu.</span>
                     </div>
                     <button type="button" class="btn-primary-etl" id="startEtlBtn" disabled>
-                        Mulai Proses ETL →
+                        Mulai Proses ETL
                     </button>
                 </div>
             </div>
