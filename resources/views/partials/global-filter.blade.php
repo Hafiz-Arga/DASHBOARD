@@ -6,7 +6,7 @@
             <label for="year">Tahun (Year)</label>
 
             <select id="year" name="year">
-                <option value="">All Years</option>
+                <option value="all" {{ $selectedYear === '' ? 'selected' : '' }}>All Years</option>
 
                 @foreach ($years as $year)
                     <option value="{{ $year }}"

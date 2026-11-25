@@ -28,7 +28,10 @@ class ExecutiveDashboardController extends Controller
             ->orderBy('Category')
             ->pluck('Category');
 
-        $selectedYear = $request->query('year', $years->last() ?? '');
+        $requestedYear = $request->query('year');
+        $selectedYear = $requestedYear === null
+            ? ($years->last() ?? '')
+            : ($requestedYear === 'all' ? '' : $requestedYear);
         $selectedRegion = $request->query('region', '');
         $selectedCategory = $request->query('category', '');
 

@@ -29,10 +29,10 @@ class ExecutiveSummaryController extends Controller
             ->pluck('Category');
 
         // Default tahun adalah tahun terakhir dalam dataset
-        $selectedYear = $request->query(
-            'year',
-            $years->last() ?? ''
-        );
+        $requestedYear = $request->query('year');
+        $selectedYear = $requestedYear === null
+            ? ($years->last() ?? '')
+            : ($requestedYear === 'all' ? '' : $requestedYear);
 
         $selectedRegion = $request->query('region', '');
         $selectedCategory = $request->query('category', '');
