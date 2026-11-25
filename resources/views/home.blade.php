@@ -535,9 +535,6 @@
                         <div class="card-action">
                             <a href="{{ route('executive-summary') }}" class="action-button">
                                 Buka Dashboard
-                                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                                </svg>
                             </a>
                         </div>
                     </article>
@@ -567,9 +564,6 @@
                         <div class="card-action">
                             <a href="{{ route('etl') }}" class="action-button">
                                 Buka Halaman ETL
-                                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                                </svg>
                             </a>
                         </div>
                     </article>
