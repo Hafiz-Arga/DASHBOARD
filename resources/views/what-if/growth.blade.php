@@ -794,7 +794,7 @@
                 <div class="whatif-breadcrumb" id="growthBreadcrumb">
                     <button class="whatif-crumb current" type="button">All Regions</button>
                 </div>
-                <button type="button" class="whatif-btn" id="growthBackBtn" style="display:none;">← Back</button>
+                <button type="button" class="whatif-btn" id="growthBackBtn" style="display:none;">Back</button>
             </div>
 
             <div class="whatif-caption" id="growthLevelCaption">Breakdown by Region</div>

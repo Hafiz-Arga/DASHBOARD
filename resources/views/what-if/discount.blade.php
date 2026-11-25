@@ -734,7 +734,7 @@
                     </nav>
 
                     <button type="button" class="whatif-back-btn" id="whatifBackBtn">
-                        ← Kembali
+                        Kembali
                     </button>
 
                 </div>
